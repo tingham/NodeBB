@@ -39,7 +39,7 @@ var bcrypt = require('bcryptjs'),
 				}
 			},
 			function(next) {
-				next((!utils.isUserNameValid(userData.username) || !userData.userslug) ? new Error('Invalid Username!') : null);
+				next((!utils.isUserNameValid(userData.username, meta.config.invalidCharacters) || !userData.userslug) ? new Error('Invalid Username!') : null);
 			},
 			function(next) {
 				if (userData.password) {
@@ -198,7 +198,8 @@ var bcrypt = require('bcryptjs'),
 				showemail: false,
 				usePagination: parseInt(meta.config.usePagination, 10) !== 0,
 				topicsPerPage: parseInt(meta.config.topicsPerPage, 10) || 20,
-				postsPerPage: parseInt(meta.config.postsPerPage, 10) || 10
+				postsPerPage: parseInt(meta.config.postsPerPage, 10) || 10,
+				invalidCharacters: meta.config.postsPerPage || ''
 			});
 		}
 
@@ -301,7 +302,7 @@ var bcrypt = require('bcryptjs'),
 					return next(null, true);
 				}
 
-				if(!utils.isUserNameValid(data.username) || !userslug) {
+				if(!utils.isUserNameValid(data.username, meta.config.invalidCharacters) || !userslug) {
 					return next(new Error('Invalid Username!'), false);
 				}
 

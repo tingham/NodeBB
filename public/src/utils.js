@@ -1,10 +1,11 @@
 (function(module) {
 	'use strict';
 
-	var utils, fs, XRegExp;
+	var utils, fs, XRegExp, meta;
 
 	if ('undefined' === typeof window) {
 		fs = require('fs');
+
 		XRegExp = require('xregexp').XRegExp;
 
 		process.profile = function(operation, start) {
@@ -130,10 +131,15 @@
 			return email.indexOf('@') !== -1;
 		},
 
-		isUserNameValid: function(name) {
+		isUserNameValid: function(name, args) {
 			// TODO: Does Redis prevent us from writing data
 			// containing the characters that are excluded here?
-			return (name && name !== "" && (/^['"\s\-.*0-9\u00BF-\u1FFF\u2C00-\uD7FF\w]+$/.test(name)));
+			if (args !== null) {
+				var regularExpression = new RegExp(args);
+				return (name && name !== "" && (regularExpression.test(name)));
+			} else {
+				return (name && name !== "");
+			}
 		},
 
 		isPasswordValid: function(password) {

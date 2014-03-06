@@ -109,6 +109,10 @@
 					</label>
 				</div>
 				<div class="form-group">
+					<label>Characters we don't like in usernames.</label>
+					<input type="text" class="form-control" data-field="invalidCharacters" placeholder="!@#$%^&*()_+=-?/\\,./<|>;:\'&quot;" />
+				</div>
+				<div class="form-group">
 					<label>Days to remember user login sessions</label>
 					<input type="text" class="form-control" data-field="loginDays" placeholder="14" />
 				</div>
