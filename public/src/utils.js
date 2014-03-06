@@ -131,6 +131,8 @@
 		},
 
 		isUserNameValid: function(name) {
+			// TODO: Does Redis prevent us from writing data
+			// containing the characters that are excluded here?
 			return (name && name !== "" && (/^['"\s\-.*0-9\u00BF-\u1FFF\u2C00-\uD7FF\w]+$/.test(name)));
 		},
 
